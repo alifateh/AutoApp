@@ -1,0 +1,9 @@
+Autoapp/adminPanel/config/phpqrcode/temp/*
+Autoapp/adminPanel/images/*
+Autoapp/adminPanel/config/config_DB.php
+Autoapp/adminPanel/config/config_SOAP_inbox.php
+Autoapp/adminPanel/config/config_SOAP.php
+Autoapp/adminPanel/p.php
+Autoapp/PWA/config/config_DB.php
+Autoapp/PWA/images/*
+Autoapp/PWA/img/*
