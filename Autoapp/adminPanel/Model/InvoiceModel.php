@@ -98,6 +98,20 @@ class Invoice
 		}
 	}
 
+	public function V_MechanicInvoice_PWA($GUID)
+	{
+
+		if ($this->_UPermission > 100) {
+			$rootDir = realpath($_SERVER["DOCUMENT_ROOT"]);
+			require("$rootDir/config/config_DB.php");
+			$qur = "SELECT * FROM `All_Member_Invoice` WHERE `Member_GUID` ='" . $GUID . "' ORDER BY `All_Member_Invoice`.`ID` DESC LIMIT 1 ";
+			$stmt = $pdo->prepare($qur);
+			$stmt->execute();
+			$data = $stmt->fetchAll();
+			return $data;
+		}
+	}
+
 	public function V_Invoice_Doc($GUID)
 	{
 

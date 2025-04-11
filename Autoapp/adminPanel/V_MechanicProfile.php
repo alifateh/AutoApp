@@ -1789,47 +1789,47 @@ if (!empty($Mechanic_GUID)) {
                                                                                 </thead>
                                                                                 <tbody>
                                                                                     <?php
-                                                                                //    if (!empty($payed)) {
-                                                                                //        foreach ($payed as $value) {
-//
-                                                                                //            $inv_info = $Invoice_obj->Get_Invoice_ByGUID($value['Invoice_GUID']);
-                                                                                //            
-                                                                                //            echo "<tr role='row' class='odd'>";
-                                                                                //            $title = $Tariff_Obj->getversion($inv_info[0]['Title']);
-                                                                                //            
-                                                                                //            echo "<td>". $title[0]['NameFa'] ."</td>";
-                                                                                //            echo "<td>" . number_format($value['Amount']) . "</td>";
-                                                                                //            if ($value['Payment_Method'] == 0) {
-                                                                                //                echo "<td class='sorting_1'> غیر اینترنتی </td>";
-                                                                                //            } else {
-                                                                                //                echo "<td class='sorting_1'> اینترنتی </td>";
-                                                                                //            }
-                                                                                //            echo "<td>" . $value['OrderID'] . "</td>";
-                                                                                //            echo "<td>" . $value['SysTraceNum'] . "</td>";
-                                                                                //            echo "<td>" . $value['RetrivalRefNum'] . "</td>";
-                                                                                //            $miladidate =  str_replace("-", "", $value['Payment_Date']);
-                                                                                //            $day = substr($miladidate, 6, 2);
-                                                                                //            $mon = substr($miladidate, 4, 2);
-                                                                                //            $year = substr($miladidate, 0, 4);
-                                                                                //            echo "<td class='sorting_1'>" . gregorian_to_jalali($year, $mon, $day, '/') . "</td>";
-                                                                                //            echo "<td>" . $value['Comment'] . "</td>";
-                                                                                //            echo "<td>";
-                                                                                //            echo '<form method="post" enctype="multipart/form-data">
-                                                                                //            <input type="hidden" id="Payed-ID" name="Payed-ID" value="' . $value['ID'] . '">
-                                                                                //            <input type="hidden" id="ActionID" name="ActionID" value="multipayment">
-                                                                                //            <button class="btn btn-success btn-outline fancy-button btn-0" onclick="return credential()" ><span class="btn-text"> ایجاد </span></button>
-                                                                                //            </form>';
-                                                                                //            echo "</td>";
-                                                                                //            echo "</tr>";
-                                                                                //        }
-                                                                                //    } else {
-                                                                                //        echo "<tr role='row' class='odd'>";
-                                                                                //        echo '<td colspan="8" style="text-align: center;">';
-                                                                                //        echo 'پرداختی تا کنون در نرم افزار ثبت نشده';
-                                                                                //        echo "</td>";
-                                                                                //        echo "</tr>";
-                                                                                //    }
-//
+                                                                                    if (!empty($payed)) {
+                                                                                        foreach ($payed as $value) {
+
+                                                                                            $inv_info = $Invoice_obj->Get_Invoice_ByGUID($value['Invoice_GUID']);
+                                                                                            
+                                                                                            echo "<tr role='row' class='odd'>";
+                                                                                            $title = $Tariff_Obj->getversion($inv_info[0]['Title']);
+                                                                                            
+                                                                                            echo "<td>". $title[0]['NameFa'] ."</td>";
+                                                                                            echo "<td>" . number_format($value['Amount']) . "</td>";
+                                                                                            if ($value['Payment_Method'] == 0) {
+                                                                                                echo "<td class='sorting_1'> غیر اینترنتی </td>";
+                                                                                            } else {
+                                                                                                echo "<td class='sorting_1'> اینترنتی </td>";
+                                                                                            }
+                                                                                            echo "<td>" . $value['OrderID'] . "</td>";
+                                                                                            echo "<td>" . $value['SysTraceNum'] . "</td>";
+                                                                                            echo "<td>" . $value['RetrivalRefNum'] . "</td>";
+                                                                                            $miladidate =  str_replace("-", "", $value['Payment_Date']);
+                                                                                            $day = substr($miladidate, 6, 2);
+                                                                                            $mon = substr($miladidate, 4, 2);
+                                                                                            $year = substr($miladidate, 0, 4);
+                                                                                            echo "<td class='sorting_1'>" . gregorian_to_jalali($year, $mon, $day, '/') . "</td>";
+                                                                                            echo "<td>" . $value['Comment'] . "</td>";
+                                                                                            echo "<td>";
+                                                                                            echo '<form method="post" enctype="multipart/form-data">
+                                                                                            <input type="hidden" id="Payed-ID" name="Payed-ID" value="' . $value['ID'] . '">
+                                                                                            <input type="hidden" id="ActionID" name="ActionID" value="multipayment">
+                                                                                            <button class="btn btn-success btn-outline fancy-button btn-0" onclick="return credential()" ><span class="btn-text"> ایجاد </span></button>
+                                                                                            </form>';
+                                                                                            echo "</td>";
+                                                                                            echo "</tr>";
+                                                                                        }
+                                                                                    } else {
+                                                                                        echo "<tr role='row' class='odd'>";
+                                                                                        echo '<td colspan="8" style="text-align: center;">';
+                                                                                        echo 'پرداختی تا کنون در نرم افزار ثبت نشده';
+                                                                                        echo "</td>";
+                                                                                        echo "</tr>";
+                                                                                    }
+
                                                                                     ?>
                                                                                 </tbody>
                                                                             </table>
