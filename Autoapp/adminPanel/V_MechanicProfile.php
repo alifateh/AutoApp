@@ -1793,18 +1793,19 @@ if (!empty($Mechanic_GUID)) {
                                                                                         foreach ($payed as $value) {
 
                                                                                             $inv_info = $Invoice_obj->Get_Invoice_ByGUID($value['Invoice_GUID']);
-                                                                                            if ($inv_info == 0){
-                                                                                                $title = "موضوع پرداخت توسط ادمین حذف شد";
-
-                                                                                            }else{
-                                                                                                $title = $Tariff_Obj->getversion($inv_info[0]['Title']);
-                                                                                                $title = $title[0]['NameFa'];
-                                                                                            }
+                                                                                           // printf($inv_info);
+                                                                                           // if ($inv_info == 0){
+                                                                                           //     $title = "موضوع پرداخت توسط ادمین حذف شد";
+                                                                                           // }else{
+                                                                                           //     $title = $Tariff_Obj->getversion($inv_info[0]['Title']);
+                                                                                           //     $title = $title[0]['NameFa'];
+                                                                                           // }
                                                                                             
                                                                                             echo "<tr role='row' class='odd'>";
                                                                                             
                                                                                             
-                                                                                            echo "<td>". $title ."</td>";
+                                                                                            echo "<td>". $printf($inv_info) ."</td>";
+                                                                                            //echo "<td>". $title ."</td>";
                                                                                             echo "<td>" . number_format($value['Amount']) . "</td>";
                                                                                             if ($value['Payment_Method'] == 0) {
                                                                                                 echo "<td class='sorting_1'> غیر اینترنتی </td>";
