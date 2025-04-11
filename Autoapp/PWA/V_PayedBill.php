@@ -136,21 +136,30 @@ if (!empty($member_GUID)) {
                                 if (!empty($payed)) {
                                     foreach ($payed as $value) {
                                         $inv_info = $Invoice_Obj->Get_Invoice_ByGUID($value['Invoice_GUID']);
-                                        $inv_Title = $Invoice_Obj->Get_InvoiceTtitle_ByID ($inv_info[0]['Title']);
-                                        echo "<tr role='row' class='odd'>";
-                                        echo "<td>" . $inv_Title[0]['NameFa'] . "</td>";
-                                        echo "<td>" . $value['Amount'] . "</td>";
-                                        if ($value['Payment_Method'] == 0) {
-                                            echo "<td class='sorting_1'> غیر اینترنتی </td>";
-                                        } else {
-                                            echo "<td class='sorting_1'> اینترنتی </td>";
-                                        }
-                                        echo "<td>" . substr ($value['RetrivalRefNum'], -12 ). " ... </td>";
-                                        $miladidate =  str_replace("-", "", $value['Payment_Date']);
-                                        $day = substr($miladidate, 6, 2);
-                                        $mon = substr($miladidate, 4, 2);
-                                        $year = substr($miladidate, 0, 4);
-                                        echo "<td class='sorting_1'>" . gregorian_to_jalali($year, $mon, $day, '/') . "</td>";
+                                        
+                                        
+                                         if ($inv_info[0]['Visible'] == 0){
+                                            $title = "موضوع پرداخت توسط ادمین حذف شد";
+                                         }else{
+                                             $title = $Invoice_Obj->Get_InvoiceTtitle_ByID ($inv_info[0]['Title']);
+                                             $title = $title[0]['NameFa'];
+                                         }
+                                         
+                                         echo "<tr role='row' class='odd'>";
+                                         echo "<td>" . $title . "</td>";
+                                         echo "<td>" . $value['Amount'] . "</td>";
+                                         if ($value['Payment_Method'] == 0) {
+                                             echo "<td class='sorting_1'> غیر اینترنتی </td>";
+                                         } else {
+                                             echo "<td class='sorting_1'> اینترنتی </td>";
+                                         }
+                                         echo "<td>" . substr ($value['RetrivalRefNum'], -12 ). " ... </td>";
+                                         $miladidate =  str_replace("-", "", $value['Payment_Date']);
+                                         $day = substr($miladidate, 6, 2);
+                                         $mon = substr($miladidate, 4, 2);
+                                         $year = substr($miladidate, 0, 4);
+                                         echo "<td class='sorting_1'>" . gregorian_to_jalali($year, $mon, $day, '/') . "</td>";
+                                        
                                     }
                                 } else {
                                     echo "<tr role='row' class='odd'>";

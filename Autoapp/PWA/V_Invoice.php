@@ -31,7 +31,7 @@ if (!empty($member_GUID)) {
     $Tariff_Obj = new tariff($member_GUID);
     $Mechanic_Info = $Mechanic_Obj->Get_MechanicsInfo_ByID($member_GUID);
     $photo = $Mechanic_Obj->Get_MechanicPhoto_ByID($member_GUID);
-    $Invoic = $Invoic_Obj->V_MechanicInvoice_PWA($member_GUID);
+    $Invoic = $Invoic_Obj->V_MechanicInvoice($member_GUID);
 }
 
 ?>

@@ -1680,27 +1680,22 @@ if (!empty($Mechanic_GUID)) {
                                                                                     <?php
 
                                                                                     if (!empty($inv)) {
+                                                                                        
                                                                                         foreach ($inv as $Inv_Value) {
                                                                                             $inv_mem = $Invoice_obj->Get_Invoice_ByGUID($Inv_Value['Inv_GUID']);
-                                                                                            foreach ($inv_mem as $value) {
+                                                                                            if ($inv_mem[0]['Visible'] == 1){
+                                                                                                $title = $Tariff_Obj->getversion($inv_mem[0]['Title']);
+                                                                                                $title = $title[0]['NameFa'];
                                                                                                 echo "<tr>";
-                                                                                                $title = $Tariff_Obj->getversion($value['Title']);
-                                                                                                //$inv_Title = $Invoice_obj->Get_InvoiceTtitle_ByID ($title[0]['NameFa']);
-                                                                                                
-                                                                                                if (!empty($title)) {
-                                                                                                    echo "<td>".$title[0]['NameFa']."</td>";
-                                                                                                } else {
-                                                                                                    echo "<td> بدون موضوع </td>";
-                                                                                                }
-
-                                                                                                echo "<td>" . number_format($value['Amount']) . "</td>";
-                                                                                                $miladidate =  str_replace("-", "", $value['Start_Date']);
+                                                                                                echo "<td>".$title."</td>";
+                                                                                                echo "<td>" . number_format($inv_mem[0]['Amount']) . "</td>";
+                                                                                                $miladidate =  str_replace("-", "", $inv_mem[0]['Start_Date']);
                                                                                                 $day = substr($miladidate, 6, 2);
                                                                                                 $mon = substr($miladidate, 4, 2);
                                                                                                 $year = substr($miladidate, 0, 4);
                                                                                                 echo "<td>" . gregorian_to_jalali($year, $mon, $day, '/') . "</td>";
-                                                                                                echo "<td>" . $value['Comment'] . "</td>";
-                                                                                                $Inv_pic = $Invoice_obj->V_Invoice_Doc($value['GUID']);
+                                                                                                echo "<td>" . $inv_mem[0]['Comment'] . "</td>";
+                                                                                                $Inv_pic = $Invoice_obj->V_Invoice_Doc($inv_mem[0]['GUID']);
                                                                                                 echo "<td>";
                                                                                                 foreach ($Inv_pic as $pic) {
                                                                                                     echo '<a href="https://adminpanel.autoapp.ir/' . $pic['location'] . '"> دانلود فایل  </a> <br />';
@@ -1708,13 +1703,16 @@ if (!empty($Mechanic_GUID)) {
                                                                                                 echo "</td>";
                                                                                                 $validation = "onclick='return validation()'";
                                                                                                 echo '
-																					      <td style ="width: 5%;">
-																						  <form method="post" enctype="multipart/form-data" action ="Invoice_Pay.php">
-																						  <input type="hidden" id="Inv_GUID" name="Inv_GUID" value="' . $value['GUID'] . '">
-																						  <input type="hidden" id="MechanicGUID" name="MechanicGUID" value="' . $Mechanic_GUID . '">
-																						  <input type="hidden" id="ActionID" name="ActionID" value="ChosePayMethod">
-																						  <button class="btn btn-success btn-outline fancy-button btn-0"><span class="btn-text"> پرداخت </span></button>
-																						  </form></td></tr>';
+																					                <td style ="width: 5%;">
+																						            <form method="post" enctype="multipart/form-data" action ="Invoice_Pay.php">
+																						            <input type="hidden" id="Inv_GUID" name="Inv_GUID" value="' . $inv_mem[0]['GUID'] . '">
+																						            <input type="hidden" id="MechanicGUID" name="MechanicGUID" value="' . $Mechanic_GUID . '">
+																						            <input type="hidden" id="ActionID" name="ActionID" value="ChosePayMethod">
+																						            <button class="btn btn-success btn-outline fancy-button btn-0"><span class="btn-text"> پرداخت </span></button>
+																						            </form></td></tr>';
+                                                                                            }else{
+                                                                                                $title = "موضوع پرداخت توسط ادمین حذف شد";
+                                                                                                break;
                                                                                             }
                                                                                         }
                                                                                     } else {
@@ -1793,19 +1791,18 @@ if (!empty($Mechanic_GUID)) {
                                                                                         foreach ($payed as $value) {
 
                                                                                             $inv_info = $Invoice_obj->Get_Invoice_ByGUID($value['Invoice_GUID']);
-                                                                                           // printf($inv_info);
-                                                                                           // if ($inv_info == 0){
-                                                                                           //     $title = "موضوع پرداخت توسط ادمین حذف شد";
-                                                                                           // }else{
-                                                                                           //     $title = $Tariff_Obj->getversion($inv_info[0]['Title']);
-                                                                                           //     $title = $title[0]['NameFa'];
-                                                                                           // }
+
+                                                                                            
+                                                                                            if ($inv_info[0]['Visible'] == 0){
+                                                                                                $title = "موضوع پرداخت توسط ادمین حذف شد";
+                                                                                            }else{
+                                                                                                $title = $Tariff_Obj->getversion($inv_info[0]['Title']);
+                                                                                                $title = $title[0]['NameFa'];
+                                                                                            }
                                                                                             
                                                                                             echo "<tr role='row' class='odd'>";
-                                                                                            
-                                                                                            
-                                                                                            echo "<td>". $printf($inv_info) ."</td>";
-                                                                                            //echo "<td>". $title ."</td>";
+                                                                                        
+                                                                                            echo "<td>". $title ."</td>";
                                                                                             echo "<td>" . number_format($value['Amount']) . "</td>";
                                                                                             if ($value['Payment_Method'] == 0) {
                                                                                                 echo "<td class='sorting_1'> غیر اینترنتی </td>";
