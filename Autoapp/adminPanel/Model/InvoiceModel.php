@@ -183,7 +183,12 @@ class Invoice
 			$stmt = $pdo->prepare($qur);
 			$stmt->execute();
 			$data = $stmt->fetchAll();
-			return $data;
+			if (!empty ($data[0]['Title'])){
+				return $data;
+			}else{
+				return 0;
+			}
+			
 		}
 	}
 
