@@ -97,7 +97,7 @@ $data = $Garage_obj->V_GarageMapsAll();
             }
         }
         ?>
-        console.log("<?php echo "Points in maps = " .$counter; ?>");
+        console.log("<?php echo "Points in maps = " .$counter; ?>"); 
     </script>
 </body>
 
