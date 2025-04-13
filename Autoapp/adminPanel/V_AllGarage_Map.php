@@ -87,11 +87,12 @@ $data = $Garage_obj->V_GarageMapsAll();
         $counter = 1;
         if (!empty($data)) {
             foreach ($data as $row) {
-                $str = '<form method="post" action="V_GarageProfile.php"><input type="hidden" name="Garage-ID" value="' . $row['GUID'] . '"><button>' . $row['Name'] . ' </button></form>';
-                echo "var popup = L.popup().setContent('" . $str . "');";
-                echo 'L.marker([' . $row['latitude'] . ', ' . $row['Longitude'] . '], {
-                    icon: GarageMarker
-                }).addTo(map).bindPopup(popup);';
+                echo $row['GUID'];
+                //$str = '<form method="post" action="V_GarageProfile.php"><input type="hidden" name="Garage-ID" value="' . $row['GUID'] . '"><button>' . $row['Name'] . ' </button></form>';
+                //echo "var popup = L.popup().setContent('" . $str . "');";
+                //echo 'L.marker([' . $row['latitude'] . ', ' . $row['Longitude'] . '], {
+                //    icon: GarageMarker
+                //}).addTo(map).bindPopup(popup);';
                 $counter++;
             }
         }
