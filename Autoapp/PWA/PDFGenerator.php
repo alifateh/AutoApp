@@ -259,8 +259,9 @@ $pdf->WriteHTML($cpoy_write, true, 0, true, 0);
 // ---------------------------------------------------------
 
 //Close and output PDF document
-$pdf->Output($tariff_auto[2] . '-' . $ver . '.pdf', 'I');
-
+// $pdf->Output($tariff_auto[2] . '-' . $ver . '.pdf', 'I');
+$pdf->Output(md5($codeContents) . '-' . md5($codeContents) . '.pdf', 'I');
+ 
 //============================================================+
 // END OF FILE
 //============================================================+
