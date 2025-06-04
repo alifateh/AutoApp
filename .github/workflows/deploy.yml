@@ -20,12 +20,14 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-      - name: Show Directory Tree
-        run: |
-          echo "Working directory:"
-          pwd
-          echo "Listing contents:"
-          ls -R
+
       - name: Deploy via SCP
         run: |
           scp -P ${{ secrets.SSH_PORT }} -r Autoapp/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/root/AutoApp_Dockerize/code/Autoapp
+
+      - name: Set permissions on remote server
+        run: |
+          ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+            find /root/AutoApp_Dockerize/code/ -type d -exec chmod 775 {} \;
+            find /root/AutoApp_Dockerize/code/ -type f -exec chmod 664 {} \;
+          EOF
