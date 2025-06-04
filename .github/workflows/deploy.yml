@@ -1,0 +1,26 @@
+name: Deploy to Remote Server via SCP
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: SCP Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy via SCP
+        run: |
+          scp -P ${{ secrets.SSH_PORT }} -r code/Autoapp/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/root/AutoApp_Dockerize/code/Autoapp
