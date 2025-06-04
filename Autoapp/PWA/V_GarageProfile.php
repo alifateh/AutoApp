@@ -132,7 +132,7 @@ $phone = $Contac_Obj->Get_GarageContact_ByID($garage[0]);
         <h6 class="user-name mb-0"><?php echo $member_FName . " " . $member_LName; ?></h6>
         <span>عضو محترم اتحادیه صنف تعمیرکاران خودرو تهران <br />
           <?php
-          if ($mem_info[3] == 1) {
+          if (!(is_null($mem_info[3])) && $mem_info[3] == 1) {
             echo 'خوش آمدید';
           } else {
             echo '<h6 style="color : #ff3535;"> حساب شما فعال نیست </h6> ';
@@ -196,7 +196,7 @@ $phone = $Contac_Obj->Get_GarageContact_ByID($garage[0]);
                     </ul>
                     <label class="form-label" dir="rtl">شماره تماس : </label>
                     <?php
-                    if (!empty($phone) && count($phone) > 0) {
+                    if (!(is_null($phone)) && count($phone) > 0) {
                       echo '<ul class="list-group">';
                       foreach ($phone as $value) {
 
@@ -236,16 +236,13 @@ $phone = $Contac_Obj->Get_GarageContact_ByID($garage[0]);
               <div class="accordion-body">
 
                 <?php
-                if (count($Mem_List) > 0) {
+                if (!(is_null($Mem_List)) && count($Mem_List) > 0) {
                   foreach ($Mem_List as $value) {
                     if ($value[1] == 2) {
                       $Cert = $mem->GetMemLicense($value[2]);
                       $Category = $mem->GetNameCategory($Cert[0]);
-                      if ($Cert[3] == 1) {
+                      if ( !(is_null($Cert)) &&  $Cert[3] == 1) {
                         $status = "فعال";
-                      } else {
-                        $status = ' غیر فعال ';
-                      }
                       echo '<h6 > رسته شغلی : ';
                       echo  $Category . "</h6>";
 
@@ -254,6 +251,9 @@ $phone = $Contac_Obj->Get_GarageContact_ByID($garage[0]);
                       echo  $Cert[1] . "</li>";
                       echo '<li class="list-group-item active"> وضعیت پروانه کسب : ';
                       echo  $status . "</li><br /></ul>";
+                      } else {
+                        $status = ' غیر فعال ';
+                      }
                     }
                   }
                 } else {
@@ -278,7 +278,7 @@ $phone = $Contac_Obj->Get_GarageContact_ByID($garage[0]);
                 <!-- List group active & disabled state -->
                 <ul class="list-group">
                   <?php
-                  if (count($Service) > 0) {
+                  if (!(is_null($Service)) && count($Service) > 0) {
                     foreach ($Service as $value) {
                       echo '<li class="list-group-item active">' . $mem->GetNameSkills($value) . '</li>';
                     }
@@ -298,7 +298,7 @@ $phone = $Contac_Obj->Get_GarageContact_ByID($garage[0]);
                 <!-- List group active & disabled state -->
                 <ul class="list-group">
                   <?php
-                  if (count($Devices) > 0) {
+                  if (!(is_null($Devices)) && count($Devices) > 0) {
                     foreach ($Devices as $value) {
                       echo '<li class="list-group-item active">' . $mem->GetNameDevices($value) . '</li>';
                     }
@@ -327,7 +327,7 @@ $phone = $Contac_Obj->Get_GarageContact_ByID($garage[0]);
                 <div class="card-body">
 
                   <?php
-                  if (count($files) > 0) {
+                  if (!(is_null($files)) && count($files) > 0) {
                     echo ' <!-- Gallery Wrapper-->
                           <div class="gallery-wrapper row g-3">
                           <div class="col-6">';

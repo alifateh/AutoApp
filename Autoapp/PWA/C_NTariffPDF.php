@@ -290,7 +290,7 @@ $pdf->WriteHTML($cpoy_write, true, 0, true, 0);
 // ---------------------------------------------------------
 
 //Close and output PDF document
-$pdf->Output('ETH_'.$auto[0]['Name'] . '-' . $get_TariffVer[0]['NameFa'] . '.pdf', 'I');
+$pdf->Output('AutoApp_'. md5($codeContents) . '_AutoApp'. '.pdf', 'I');
 
 //============================================================+
 // END OF FILE

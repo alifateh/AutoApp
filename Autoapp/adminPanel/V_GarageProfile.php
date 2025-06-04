@@ -540,11 +540,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 </head>
 
 <body>
-	<!-- Preloader -->
+	 <!-- 
 	<div class="preloader-it">
 		<div class="la-anim-1"></div>
 	</div>
-	<!-- /Preloader -->
+	 /Preloader -->
 	<div class="wrapper theme-1-active pimary-color-red">
 		<!-- mini Menu Items -->
 		<?php minimenu(); ?>
@@ -601,12 +601,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 														<a href="#" data-toggle="modal" data-target="#Add_Phone"><span>شماره تماس</span></a>
 													</li>
 													<?php
-													if (count($Garage_Facility) == 0) {
+													if (!(is_null($Garage_Facility)) && count($Garage_Facility) == 0) {
 														echo '<li>
 														<a href="#" data-toggle="modal" data-target="#Add_Facility"><span>امکانات رفاهی</span></a>
 														</li>';
 													}
-													if (count($Garage_Certificate) < 3) {
+
+													if (!(is_null($Garage_Certificate))  && count($Garage_Certificate) < 3) {
 														echo '<li>
 														<a href="#" data-toggle="modal" data-target="#Add_Cert"><span>پروانه کسب</span></a>
 														</li>';
@@ -619,13 +620,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 														<a href="#" data-toggle="modal" data-target="#profilepic"><span>تصویر پروفایل</span></a>
 													</li>
 													<?php
-													if (count($Service) == 0) {
+													if (!(is_null($Service)) && count($Service) == 0) {
 														echo '<li><a href="edit-garage-skill.php" ><span> تخصص ها </span></a></li>';
 													}
-													if (empty($auto_obj)) {
+													if (!(is_null($auto_obj)) && empty($auto_obj)) {
 														echo '<li><a href="edit-garage-auto.php" ><span> خودروهای تخصصی </span></a></li>';
 													}
-													if (count($Devices) == 0) {
+													if (!(is_null($Devices)) && count($Devices) == 0) {
 														echo '<li><a href="edit-garage-devices.php" ><span> دستگاه های تخصصی </span></a></li>';
 													}
 													?>
@@ -645,24 +646,24 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 														<a href="#" data-toggle="modal" data-target="#AddressInfo"><span>اطلاعات نشانی</span></a>
 													</li>
 													<?php
-													if (count($Garage_Facility) > 0) {
+													if (!(is_null($Garage_Facility)) && count($Garage_Facility) > 0) {
 														echo '<li>
 														<a href="#" data-toggle="modal" data-target="#Add_Facility"><span>امکانات رفاهی</span></a>
 														</li>';
 													}
 
-													if (count($Garage_Certificate) > 0) {
+													if (!(is_null($Garage_Certificate)) && count($Garage_Certificate) > 0) {
 														echo '<li><a href="#" data-toggle="modal" data-target="#certificate"><span>اطلاعات جواز</span></a></li>';
 													}
-													if (count($Service) > 0) {
+													if (!(is_null($Service)) && count($Service) > 0) {
 														echo '<li><a href="edit-garage-skill.php" ><span> تخصص ها </span></a></li>';
 													}
 
-													if (!empty($auto_obj)) {
+													if (!(is_null($auto_obj)) && !empty($auto_obj)) {
 														echo '<li><a href="edit-garage-auto.php" ><span>  خودروهای تخصصی </span></a></li>';
 													}
 
-													if (count($Devices) > 0) {
+													if (!(is_null($Devices)) && count($Devices) > 0) {
 														echo '<li><a href="edit-garage-devices.php" ><span> دستگاه های تخصصی </span></a></li>';
 													}
 
@@ -675,19 +676,19 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 												<button aria-expanded="false" data-toggle="dropdown" class="btn btn-default btn-block btn-outline fancy-button btn-0 mt-30" type="button"> حذف <span class="caret"></span></button>
 												<ul role="menu" data-dropdown-in="flipInY" data-dropdown-out="flipOutY" class="dropdown-menu">
 													<?php
-													if (count($Mem_List) > 0) {
+													if (!(is_null($Mem_List)) && count($Mem_List) > 0) {
 														echo '<li><a href="#" data-toggle="modal" data-target="#Del_Personnel"><span>پرسنل</span></a></li>';
 													}
 
-													if (count($phone) > 0) {
+													if (!(is_null($phone)) && count($phone) > 0) {
 														echo '<li><a href="#" data-toggle="modal" data-target="#Del_Phone"><span>شماره تماس</span></a></li>';
 													}
 
-													if (count($Garage_Certificate) > 0) {
+													if (!(is_null($Garage_Certificate)) && count($Garage_Certificate) > 0) {
 														echo '<li><a href="#" data-toggle="modal" data-target="#Del_Cert"><span>پروانه کسب</span></a></li>';
 													}
 
-													if (count($files) > 0) {
+													if (!(is_null($files)) && count($files) > 0) {
 														echo '<li><a href="#" data-toggle="modal" data-target="#Del_document"><span>مدارک</span></a></li>';
 													}
 													?>
@@ -772,7 +773,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 																												<?php
 																												$operator = $Phone_Obj->Get_PhoneOperator();
 																												echo '<option value=""> انتخاب نمایید </option>';
-																												if (!empty($operator)) {
+																												if (!(is_null($operator)) && !empty($operator)) {
 																													foreach ($operator as $key) {
 																														echo '<option value=' . $key['ID'] . '>' . $key['PersianName'] . '</option>';
 																													}
@@ -902,7 +903,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 																									<select class="form-control" multiple name="G_Facility[]" id="G_Facility[]" data-style="form-control btn-default btn-outline">
 																										<?php
 																										$Autoapp_LocationFacility = $Garage_obj->GetFacilityTopic();
-																										if (!empty($Garage_Facility)) {
+																										if (!(is_null($Garage_Facility)) && !empty($Garage_Facility)) {
 																											foreach ($Autoapp_LocationFacility as $key) {
 																												$count = 0;
 																												foreach ($Garage_Facility as $value) {
@@ -1047,7 +1048,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 																								<tbody>
 																									<?php
 																									$data = $Garage_obj->V_GaragePersonnel($Garage_GUID);
-																									if (!empty($data)) {
+																									if (!(is_null($data)) && !empty($data)) {
 																										foreach ($data as $row) {
 																											echo "<tr>";
 																											$name = $Garage_obj->GetMemberName($row['Personnel_GUID']);
@@ -1110,7 +1111,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 																								</thead>
 																								<tbody>
 																									<?php
-																									if (!empty($phone)) {
+																									if (!(is_null($phone)) && !empty($phone)) {
 																										foreach ($phone as $row) {
 																											echo "<tr>";
 																											if ($row['Mobile'] == 0) {
@@ -1178,7 +1179,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 																								<tbody>
 																									<?php
 																									$data = $Garage_obj->V_GarageCert($Garage_GUID);
-																									if (!empty($data)) {
+																									if (!(is_null($data)) && !empty($data)) {
 																										foreach ($data as $row) {
 																											$Issuer = $Garage_obj->GetCertIssuerbyID($row['CertIssuer']);
 																											$status = $Garage_obj->GetCertStatusbyID($row['CertStatus']);
@@ -1446,7 +1447,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 																						<form method="post" enctype="multipart/form-data">
 																							<input type="hidden" id="GarageGUID" name="GarageGUID" value="<?php echo $Garage_GUID; ?>">
 																							<?php
-																							if (!empty($Garage_Certificate)) {
+																							if (!(is_null($Garage_Certificate)) && !empty($Garage_Certificate)) {
 
 																								foreach ($Garage_Certificate as $value) {
 																									$Issuer = $Garage_obj->GetCertIssuerbyID($value[1]);
@@ -1554,7 +1555,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 																								<label class="control-label mb-10"><i class="text-info mb-10">*</i> استان : </label>
 																								<select class="form-control" dir="rtl" Name="N_Province" id="N_Province">
 																									<?php
-																									if (!empty($G_ProvincesAll)) {
+																									if (!(is_null($G_ProvincesAll)) && !empty($G_ProvincesAll)) {
 																										foreach ($G_ProvincesAll as $row) {
 																											if ($Garage_address[6] == $row['ID']) {
 																												echo '<option value="' . $row['ID'] . '" selected >' . $row['Name'] . '</option>';
@@ -1572,7 +1573,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 																								<label class="control-label mb-10"><i class="text-info mb-10">*</i> شهر : </label>
 																								<select class="form-control" dir="rtl" Name="N_City" id="N_City">
 																									<?php
-																									if (!empty($G_CityProvince)) {
+																									if (!(is_null($G_CityProvince)) && !empty($G_CityProvince)) {
 																										foreach ($G_CityProvince as $row) {
 																											if ($Garage_address[7] == $row['GUID']) {
 																												echo '<option value="' . $row['GUID'] . '" selected >' . $row['FAName'] . '</option>';
@@ -1804,7 +1805,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 																$Ownership = $Garage_obj->GetOwnershipTopicbyID($Garage_info[2]);
 																echo "<td>" . $Ownership[0] . "</td>";
 																echo "</tr>";
-																if (!empty($Garage_info[4])) {
+																if (!(is_null($Garage_info[4])) && !empty($Garage_info[4])) {
 																	echo "<tr>";
 																	echo "<td> شماره پلاک ثبتی : </td>";
 																	echo "<td>" . $Garage_info[4] . " (شمارۀ اصلی/شمارۀ فرعی) </td>";
@@ -1819,7 +1820,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 																echo "<tr>";
 																echo "<td> امکانات رفاهی : </td>";
 																echo "<td>";
-																if (!empty($Garage_Facility)) {
+																if (!(is_null($Garage_Facility)) && !empty($Garage_Facility)) {
 																	$Facility = array();
 																	$Facility_name = array();
 																	$j = 0;
@@ -1837,7 +1838,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 																}
 																echo "</td>";
 																echo "</tr>";
-																if (!empty($Garage_info[9])) {
+																if (!(is_null($Garage_info[9])) && !empty($Garage_info[9])) {
 																	echo "<tr>";
 																	echo "<td> کلید واژه ها : </td>";
 																	echo "<td>" . str_replace(",", " - ", $Garage_info[9]) . "</td>";
@@ -1863,7 +1864,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 															<table class="table table-striped display product-overview" id="datable_1">
 																<tbody>
 																	<?php
-																	if (!empty($Garage_info[5])) {
+																	if (!(is_null($Garage_info[5])) && !empty($Garage_info[5])) {
 																		echo "<tr>";
 																		echo "<td> شماره پلاک شهرداری : </td>";
 																		echo "<td>" . $Garage_info[5] . "</td>";
@@ -1874,7 +1875,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 																		echo "<td> شماره پلاکی برای این تعمیرگاه ثبت نشده است </td>";
 																		echo "</tr>";
 																	}
-																	if (!empty($Garage_address[5])) {
+																	if (!(is_null($Garage_address[5])) && !empty($Garage_address[5])) {
 																		echo "<tr>";
 																		echo "<td> کد پستی : </td>";
 																		echo "<td>" . $Garage_address[5] . "</td>";
@@ -1886,7 +1887,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 																		echo "</tr>";
 																	}
 
-																	if (!empty($Garage_address[2])) {
+																	if (!(is_null($Garage_address[2])) && !empty($Garage_address[2])) {
 																		echo "<tr>";
 																		echo "<td> نشانی : </td>";
 																		echo "<td>" . $Garage_address[2] . "</td>";
@@ -1897,7 +1898,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 																		echo "<td> آدرسی برای این تعمیرگاه ثبت نشده است </td>";
 																		echo "</tr>";
 																	}
-																	if (!empty($phone)) {
+																	if (!(is_null($phone)) && !empty($phone)) {
 																		foreach ($phone as $value) {
 																			if ($value['Mobile'] == 0) {
 																				echo "<tr>";
@@ -1919,7 +1920,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 																		echo "</tr>";
 																	}
 																	echo "<tr>";
-																	if (!empty($Province)) {
+																	if (!(is_null($Province)) && !empty($Province)) {
 																		echo "<td> نام استان : </td>";
 																		echo "<td>" . $Province[0]['Name'] . "</td>";
 																	} else {
@@ -1930,7 +1931,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 																	
 																	echo "</tr>";
 																	echo "<tr>";
-																	if (!empty($city)) {
+																	if (!(is_null($city)) && !empty($city)) {
 																		echo "<td> نام شهر : </td>";
 																		echo "<td>" . $city[0]['FAName'] . "</td>";
 																	} else {
@@ -1963,7 +1964,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 															<table class="table table-striped display product-overview" id="datable_1">
 																<tbody>
 																	<?php
-																	if (count($Mem_List) > 0) {
+																	if (!(is_null($Mem_List)) && count($Mem_List) > 0) {
 																		foreach ($Mem_List as $value) {
 																			if ($value[1] == 2) {
 																				$Cert = $Garage_Personnel->GetMemLicense($value[2]);
@@ -2010,7 +2011,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 															<table class="table table-striped display product-overview" id="datable_1">
 																<tbody>
 																	<?php
-																	if (count($Garage_Certificate) > 0) {
+																	if (!(is_null($Garage_Certificate)) && count($Garage_Certificate) > 0) {
 																		foreach ($Garage_Certificate as $value) {
 																			$Issuer = $Garage_obj->GetCertIssuerbyID($value[1]);
 																			$status = $Garage_obj->GetCertStatusbyID($value[2]);
@@ -2045,7 +2046,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 											<div id="photos_8" class="tab-pane fade" role="tabpanel">
 												<div class="col-md-12 pb-20">
 													<?php
-													if (count($files) > 0) {
+													if (!(is_null($files)) && count($files) > 0) {
 														echo '<div class="gallery-wrap"><div class="portfolio-wrap project-gallery" style="width: 0px;">';
 														echo '<ul id="portfolio_1" class="portf auto-construct  project-gallery" data-col="4" style="position: relative; height: 20px;">';
 														foreach ($files as $value) {
@@ -2080,7 +2081,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 																	<table class="table table-striped display product-overview" id="datable_1">
 																		<tbody>
 																			<?php
-																			if (!empty($auto)) {
+																			if (!(is_null($auto)) && !empty($auto)) {
 																				foreach ($auto as $key) {
 																					echo "<tr>";
 																					echo "<td> نام خودرو : </td>";
@@ -2130,7 +2131,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 															<table class="table table-striped display product-overview" id="datable_1">
 																<tbody>
 																	<?php
-																	if (count($Service) > 0) {
+																	if (!(is_null($Service)) && count($Service) > 0) {
 																		foreach ($Service as $value) {
 																			echo "<tr>";
 																			echo "<td> نام سرویس : </td>";
@@ -2161,7 +2162,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 															<table class="table table-striped display product-overview" id="datable_1">
 																<tbody>
 																	<?php
-																	if (count($Devices) > 0) {
+																	if (!(is_null($Devices)) && count($Devices) > 0) {
 																		foreach ($Devices as $value) {
 																			echo "<tr>";
 																			echo "<td> دستگاه تخصصی : </td>";
@@ -2192,7 +2193,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 															<table class="table table-striped display product-overview" id="datable_1">
 																<tbody>
 																	<?php
-																	if (count($Mem_List) > 0) {
+																	if (!(is_null($Mem_List)) && count($Mem_List) > 0) {
 																		foreach ($Mem_List as $value) {
 																			echo "<tr>";
 																			echo "<td> نام و نام خانوادگی : </td>";
